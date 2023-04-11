@@ -1,0 +1,3 @@
+/Users/brianwaobikeze/Desktop/OSAssinement3/multThreadingBriddge/cmake-build-debug/CMakeFiles/multThreadingBriddge.dir
+/Users/brianwaobikeze/Desktop/OSAssinement3/multThreadingBriddge/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/brianwaobikeze/Desktop/OSAssinement3/multThreadingBriddge/cmake-build-debug/CMakeFiles/rebuild_cache.dir
