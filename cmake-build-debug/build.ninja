@@ -48,7 +48,7 @@ build cmake_object_order_depends_target_multThreadingBriddge: phony || CMakeFile
 
 build CMakeFiles/multThreadingBriddge.dir/main.cpp.o: CXX_COMPILER__multThreadingBriddge_Debug /Users/brianwaobikeze/Desktop/OSAssinement3/multThreadingBriddge/main.cpp || cmake_object_order_depends_target_multThreadingBriddge
   DEP_FILE = CMakeFiles/multThreadingBriddge.dir/main.cpp.o.d
-  FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -std=gnu++14
+  FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -std=gnu++14
   OBJECT_DIR = CMakeFiles/multThreadingBriddge.dir
   OBJECT_FILE_DIR = CMakeFiles/multThreadingBriddge.dir
   TARGET_COMPILE_PDB = CMakeFiles/multThreadingBriddge.dir/
@@ -63,7 +63,7 @@ build CMakeFiles/multThreadingBriddge.dir/main.cpp.o: CXX_COMPILER__multThreadin
 # Link the executable multThreadingBriddge
 
 build multThreadingBriddge: CXX_EXECUTABLE_LINKER__multThreadingBriddge_Debug CMakeFiles/multThreadingBriddge.dir/main.cpp.o
-  FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk
+  FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk
   OBJECT_DIR = CMakeFiles/multThreadingBriddge.dir
   POST_BUILD = :
   PRE_LINK = :
