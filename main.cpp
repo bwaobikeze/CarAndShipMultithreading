@@ -67,13 +67,13 @@ void* shipRoutine(void* arg){
     cout<<"Ship "<<shipName << " Leaves"<<endl;
     sleep(bridgeTimeToLowerDrawbridge);
 
-    cout<<"Drawbridge is reopened to car traffic"<< endl;
-
     DrawbridgeStatus=CARSCANGO;
 
-    pthread_cond_signal(&carsCanGoCond);
+    pthread_cond_broadcast(&carsCanGoCond);
 
     pthread_mutex_unlock(&drawBridgeLock);
+
+    cout<<"Drawbridge is reopened to car traffic"<< endl;
 
     return nullptr;
 }
@@ -129,13 +129,13 @@ int main() {
     vector<vehicle> transportation;
     string FileReadin;
 
-//    ifstream file("input30.txt");
-//
-//    if (!file) {
-//        cerr << "Failed to open file" << std::endl;
-//        return 1;
-//    }
-    while(getline(cin,FileReadin)){
+    ifstream file("input30.txt");
+
+    if (!file) {
+        cerr << "Failed to open file" << std::endl;
+        return 1;
+    }
+    while(getline(file,FileReadin)){
         //cout<<FileReadin<<endl;
         stringstream  ss(FileReadin);
         string type, name;
