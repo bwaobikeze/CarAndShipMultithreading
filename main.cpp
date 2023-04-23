@@ -10,10 +10,8 @@ using namespace std;
 enum drawbridgeStatus {NOCARS, CARSCANGO};
 drawbridgeStatus DrawbridgeStatus=CARSCANGO;
 pthread_cond_t carsCanGoCond=PTHREAD_COND_INITIALIZER;
-int bridgeTimeToRaiseDrawbridge=1;
-int bridgeTimeToLowerDrawbridge=1;
-int temp1;
-int temp2;
+int bridgeTimeToRaiseDrawbridge;
+int bridgeTimeToLowerDrawbridge;
 int nCars;
 int nShips;
 static pthread_mutex_t drawBridgeLock=PTHREAD_MUTEX_INITIALIZER;
@@ -63,10 +61,10 @@ void* carRoutine(void* arg){
     if(DrawbridgeStatus==NOCARS){
         pthread_cond_wait(&carsCanGoCond,&drawBridgeLock);
     }
-cout<<"Car "<<carName<<" goes on the drawbridge"<<endl;
-sleep(threadData.TimeForCarToCross);
+    cout<<"Car "<<carName<<" goes on the drawbridge"<<endl;
+    sleep(threadData.TimeForCarToCross);
 
-cout<<"Car "<<carName<<" Leaves the drawbridge"<<endl;
+    cout<<"Car "<<carName<<" Leaves the drawbridge"<<endl;
 
     pthread_mutex_unlock(&drawBridgeLock);
     return nullptr;
@@ -91,6 +89,7 @@ Ship Alicia 1 2
 Car 2ZBEACH 2 2
  ***************/
 int main() {
+    vector<string> checkLine;
     vector<vehicle> transportation;
     string FileReadin;
 
@@ -101,15 +100,16 @@ int main() {
         return 1;
     }
     while (getline(file, FileReadin)) {
-        //cout<<FileReadin<<endl;
-        stringstream ss(FileReadin);
+       stringstream ss(FileReadin);
         string type, name;
-        int x, y;
-        ss >> type >> name >> x >> y;
+       int x, y;
+        ss >> type;
         if (type == "Bridge") {
-            temp1 = x;
-            temp2 = y;
+            ss>> x >> y;
+            bridgeTimeToRaiseDrawbridge= x;
+            bridgeTimeToLowerDrawbridge = y;
         } else if (type == "Car" || type == "Ship") {
+            ss >> name>> x >> y;
             vehicle Vehicle;
             Vehicle.vehicletype = type;
             Vehicle.licensePlateNumber = name;
@@ -118,24 +118,24 @@ int main() {
             transportation.push_back(Vehicle);
         }
     }
-    cout<<"Bridge Rise Time: "<<temp1<<endl;
-    cout<<"Bridge lower Time: "<<temp2<<endl;
-//    pthread_t pid[transportation.size()];
-//    for (int i = 0; i < transportation.size(); i++) {
-//        vehicle *temp = new vehicle(transportation[i]);
-//        sleep(temp->arrivalTime);
-//        if (pthread_create(&pid[i], NULL, &threadFunction, temp) != 0) {
-//            perror("Failed to create thread");
-//            return 1;
-//        }
-//    }
-//    for (int i = 0; i < transportation.size(); i++) {
-//        if (pthread_join(pid[i], NULL) != 0) {
-//            return 2;
-//        }
-//    }
-//    cout << nCars << " Cars(s) crossed the bridge." << endl;
-//    cout << nShips << " Ship(s) crossed the bridge." << endl;
+    pthread_t pid[transportation.size()];
+    for (int i = 0; i < transportation.size(); i++) {
+        vehicle *temp = new vehicle(transportation[i]);
+        sleep(temp->arrivalTime);
+        if (pthread_create(&pid[i], NULL, &threadFunction, temp) != 0) {
+            perror("Failed to create thread");
+            return 1;
+        }
+    }
+    for (int i = 0; i < transportation.size(); i++) {
+        if (pthread_join(pid[i], NULL) != 0) {
+            return 2;
+        }
+    }
+    cout << nCars << " Cars(s) crossed the bridge." << endl;
+    cout << nShips << " Ship(s) crossed the bridge." << endl;
+
+
     return 0;
 }
 
