@@ -58,7 +58,7 @@ void* carRoutine(void* arg){
 
     nCars++;
 
-    if(DrawbridgeStatus==NOCARS){
+    while(DrawbridgeStatus==NOCARS){
         pthread_cond_wait(&carsCanGoCond,&drawBridgeLock);
     }
     cout<<"Car "<<carName<<" goes on the drawbridge"<<endl;
@@ -93,13 +93,7 @@ int main() {
     vector<vehicle> transportation;
     string FileReadin;
 
-    ifstream file("input30.txt");
-
-    if (!file) {
-        cerr << "Failed to open file" << std::endl;
-        return 1;
-    }
-    while (getline(file, FileReadin)) {
+    while (getline(cin, FileReadin)) {
        stringstream ss(FileReadin);
         string type, name;
        int x, y;
@@ -134,7 +128,6 @@ int main() {
     }
     cout << nCars << " Cars(s) crossed the bridge." << endl;
     cout << nShips << " Ship(s) crossed the bridge." << endl;
-
 
     return 0;
 }
