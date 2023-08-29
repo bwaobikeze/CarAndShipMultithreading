@@ -32,9 +32,3 @@ The Drawbridge Project is a simulation program designed to mimic the traffic sce
 - Integration of more advanced traffic management algorithms for a more realistic simulation.
 - Visualization tools to provide a graphical representation of the traffic flow.
 
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
----
-*Note: This README is a sample template and should be customized to match your project's specific details.*
